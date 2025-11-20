@@ -1,95 +1,95 @@
-let gameBoard = document.getElementById("game");
-let failsText = document.getElementById("fails");
-let matchesText = document.getElementById("matches");
+let gameBoard = document.getElementById("game")
+let failsText = document.getElementById("fails")
+let matchesText = document.getElementById("matches")
 
-let fails = 0;
-let matches = 0;
-let firstCard = null;
-let secondCard = null;
-let lockBoard = false;
-let gameOver = false; // ⛔ stop saat menang/kalah
+let fails = 0
+let matches = 0
+let firstCard = null
+let secondCard = null
+let lockBoard = false
+let gameOver = false // stop saat menang/kalah
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
-    let r = Math.floor(Math.random() * (i + 1));
-    [array[i], array[r]] = [array[r], array[i]];
+    let r = Math.floor(Math.random() * (i + 1))
+    [array[i], array[r]] = [array[r], array[i]]
   }
 }
 
-let cards = ["A", "A", "B", "B", "C", "C"];
-shuffle(cards);
+let cards = ["A", "A", "B", "B", "C", "C"]
+shuffle(cards)
 
 cards.forEach((value) => {
-  let card = document.createElement("div");
-  card.className = "card";
-  card.dataset.value = value;
+  let card = document.createElement("div")
+  card.className = "card"
+  card.dataset.value = value
 
-  let front = document.createElement("div");
-  front.className = "front";
-  front.textContent = "?";
+  let front = document.createElement("div")
+  front.className = "front"
+  front.textContent = "?"
 
-  let back = document.createElement("div");
-  back.className = "back";
-  back.textContent = value;
+  let back = document.createElement("div")
+  back.className = "back"
+  back.textContent = value
 
-  card.appendChild(front);
-  card.appendChild(back);
+  card.appendChild(front)
+  card.appendChild(back)
 
-  card.addEventListener("click", () => clickCard(card));
-  gameBoard.appendChild(card);
+  card.addEventListener("click", () => clickCard(card))
+  gameBoard.appendChild(card)
 });
 
 function clickCard(card) {
-  if (gameOver) return;   // ⛔ stop kalau game selesai
-  if (lockBoard) return;
-  if (card.classList.contains("open") || card.classList.contains("matched")) return;
-  if (card === firstCard) return;
+  if (gameOver) return   // stop kalau game selesai
+  if (lockBoard) return
+  if (card.classList.contains("open") || card.classList.contains("matched")) return
+  if (card === firstCard) return
 
-  card.classList.add("open");
+  card.classList.add("open")
 
   if (!firstCard) {
-    firstCard = card;
+    firstCard = card
   } else {
-    secondCard = card;
-    lockBoard = true;
-    setTimeout(checkMatch, 700);
+    secondCard = card
+    lockBoard = true
+    setTimeout(checkMatch, 700)
   }
 }
 
 function checkMatch() {
   if (firstCard.dataset.value === secondCard.dataset.value) {
-    firstCard.classList.add("matched");
-    secondCard.classList.add("matched");
-    matches++;
-    matchesText.textContent = matches;
+    firstCard.classList.add("matched")
+    secondCard.classList.add("matched")
+    matches++
+    matchesText.textContent = matches
   } else {
-    fails++;
-    failsText.textContent = fails;
+    fails++
+    failsText.textContent = fails
 
   setTimeout(() => {
-  firstCard.classList.remove("open");
-  secondCard.classList.remove("open");
-}, 300);
+  firstCard.classList.remove("open")
+  secondCard.classList.remove("open")
+}, 300)
 
   }
 
-  // 🏆 CEK MENANG / KALAH SEBELUM RESET BOARD
+  // Cek menang/kalah sebelum game selesai
   if (matches === 3) {
-    gameOver = true;
-    setTimeout(() => alert("🎉 Kamu Menang!"), 300);
-    return; // ⛔ STOP, jangan lanjut reset click
+    gameOver = true
+    setTimeout(() => alert("🎉 Kamu Menang!"), 300)
+    return
   }
 
   if (fails >= 3) {
-    gameOver = true;
-    setTimeout(() => alert("💀 Kesempatan habis! Kamu kalah."), 300);
-    return; // ⛔ STOP
+    gameOver = true
+    setTimeout(() => alert("💀 Kesempatan habis! Kamu kalah."), 300)
+    return
   }
 
-  // RESET BOARD SETELAH DIPASTIKAN BUKAN GAME OVER
+  // Reset board setelah dipastikan belum game over
   setTimeout(() => {
-    firstCard = null;
-    secondCard = null;
-    lockBoard = false;  // 🔓 buka lagi klik
-  }, 450);
+    firstCard = null
+    secondCard = null
+    lockBoard = false
+  }, 450)
 }

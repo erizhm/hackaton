@@ -36,10 +36,13 @@ cards.forEach((value) => {
 });
 
 function clickCard(card) {
-  if (lockBoard) return; // ⛔ cegah klik saat sedang proses
+  if (lockBoard) return;
   if (card.classList.contains("open") || card.classList.contains("matched")) {
     return;
   }
+
+  // ⛔ Cegah klik kartu yang sama dua kali
+  if (card === firstCard) return;
 
   card.classList.add("open");
   card.textContent = card.dataset.value;
@@ -49,7 +52,7 @@ function clickCard(card) {
   } else if (!secondCard) {
     secondCard = card;
 
-    lockBoard = true; // 🔒 kunci klik
+    lockBoard = true;
 
     setTimeout(() => {
       checkMatch();

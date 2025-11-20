@@ -1,12 +1,21 @@
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   font-family: Arial, sans-serif;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+}
+
+.info {
+  margin: 20px 0;
+  font-size: 20px;
 }
 
 .game {
@@ -14,7 +23,6 @@ body {
   grid-template-columns: repeat(3, 100px);
   gap: 15px;
   justify-content: center;
-  margin-top: 20px;
 }
 
 .card {
@@ -42,7 +50,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 40px;
-  backface-visibility: hidden; /* WAJIB AGAR TEXT TIDAK TERBALIK */
+  backface-visibility: hidden;
 }
 
 .front {

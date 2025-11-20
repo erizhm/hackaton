@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // SEMUA KODE JAVASCRIPT ANDA DIMASUKKAN DI SINI
 
     let gameBoard = document.getElementById("game")
     let failsText = document.getElementById("fails")
@@ -96,5 +95,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 450)
     }
 
-    // SEMUA KODE JAVASCRIPT ANDA BERAKHIR DI SINI
 });

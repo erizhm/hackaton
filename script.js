@@ -29,7 +29,18 @@ cards.forEach((value) => {
   let card = document.createElement("div");
   card.className = "card";
   card.dataset.value = value;
-  card.textContent = "?";
+
+  // dua sisi kartu
+  let front = document.createElement("div");
+  front.className = "front";
+  front.textContent = "?";
+
+  let back = document.createElement("div");
+  back.className = "back";
+  back.textContent = value;
+
+  card.appendChild(front);
+  card.appendChild(back);
 
   card.addEventListener("click", () => clickCard(card));
   gameBoard.appendChild(card);

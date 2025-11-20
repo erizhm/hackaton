@@ -63,13 +63,14 @@ function checkMatch() {
     matches++
     matchesText.textContent = matches
   } else {
+    // START PERBAIKAN SINTAKSIS DI BLOK ELSE
     fails++
     failsText.textContent = fails
 
-  setTimeout(() => {
-  firstCard.classList.remove("open")
-  secondCard.classList.remove("open")
-}, 300)
+    setTimeout(() => {
+      firstCard.classList.remove("open")
+      secondCard.classList.remove("open")
+    }, 300)
 
   }
 

@@ -53,32 +53,13 @@ function clickCard(card) {
   }
 }
 
-  // buka kartu
-  card.classList.add("open");
-  card.textContent = card.dataset.value;
-
-  if (!firstCard) {
-    firstCard = card;
-
-  } else if (!secondCard) {
-    secondCard = card;
-
-    // kartu kedua ditutup setelah 1 detik
-    setTimeout(() => {
-      checkMatch();
-    }, 1000);
-  }
-}
-
 function checkMatch() {
   if (firstCard.dataset.value === secondCard.dataset.value) {
-    // match
     firstCard.classList.add("matched");
     secondCard.classList.add("matched");
     matches++;
     matchesText.textContent = matches;
   } else {
-    // gagal → tutup kedua kartu
     fails++;
     failsText.textContent = fails;
 

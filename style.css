@@ -24,11 +24,14 @@ body {
   border-radius: 8px;
   font-size: 32px;
   user-select: none;
+  transition: transform 0.3s;
+  transform-style: preserve-3d;
 }
 
 .card.open {
   background: #ffc107;
   color: black;
+  transform: rotateY(180deg);
 }
 
 .card.matched {

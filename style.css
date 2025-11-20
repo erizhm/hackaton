@@ -5,6 +5,8 @@
 }
 
 body {
+  background: #0b6623;
+  background-image: url("https://www.transparenttextures.com/patterns/cloth.png")
   font-family: Arial, sans-serif;
   text-align: center;
   display: flex;

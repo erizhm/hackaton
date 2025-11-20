@@ -70,19 +70,23 @@ function checkMatch() {
     secondCard.classList.remove("open");
   }
 
-  firstCard = null;
-  secondCard = null;
-  lockBoard = false;
-
-  // 🏆 KONDISI MENANG
+  // 🏆 CEK MENANG / KALAH SEBELUM RESET BOARD
   if (matches === 3) {
     gameOver = true;
     setTimeout(() => alert("🎉 Kamu Menang!"), 300);
+    return; // ⛔ STOP, jangan lanjut reset click
   }
 
-  // ❌ KONDISI KALAH (max gagal 3)
   if (fails >= 3) {
     gameOver = true;
     setTimeout(() => alert("💀 Kesempatan habis! Kamu kalah."), 300);
+    return; // ⛔ STOP
   }
+
+  // RESET BOARD SETELAH DIPASTIKAN BUKAN GAME OVER
+  setTimeout(() => {
+    firstCard = null;
+    secondCard = null;
+    lockBoard = false;  // 🔓 buka lagi klik
+  }, 200);
 }

@@ -6,6 +6,7 @@ let fails = 0;
 let matches = 0;
 let firstCard = null;
 let secondCard = null;
+let lockBoard = false;
 
 // shuffle
 function shuffle(array) {
@@ -35,6 +36,7 @@ cards.forEach((value) => {
 });
 
 function clickCard(card) {
+  if (lockBoard) return; // ⛔ cegah klik saat sedang proses
   if (card.classList.contains("open") || card.classList.contains("matched")) {
     return;
   }
@@ -46,6 +48,8 @@ function clickCard(card) {
     firstCard = card;
   } else if (!secondCard) {
     secondCard = card;
+
+    lockBoard = true; // 🔒 kunci klik
 
     setTimeout(() => {
       checkMatch();
@@ -72,6 +76,8 @@ function checkMatch() {
 
   firstCard = null;
   secondCard = null;
+
+  lockBoard = false; // 🔓 buka kembali klik setelah selesai
 
   if (matches === 3) {
     setTimeout(() => alert("Kamu Menang! 🎉"), 300);

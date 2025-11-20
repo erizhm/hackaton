@@ -7,6 +7,7 @@ let matches = 0;
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
+let gameOver = false; // ⛔ stop saat menang/kalah
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -39,6 +40,7 @@ cards.forEach((value) => {
 });
 
 function clickCard(card) {
+  if (gameOver) return;   // ⛔ stop kalau game selesai
   if (lockBoard) return;
   if (card.classList.contains("open") || card.classList.contains("matched")) return;
   if (card === firstCard) return;
@@ -71,4 +73,16 @@ function checkMatch() {
   firstCard = null;
   secondCard = null;
   lockBoard = false;
+
+  // 🏆 KONDISI MENANG
+  if (matches === 3) {
+    gameOver = true;
+    setTimeout(() => alert("🎉 Kamu Menang!"), 300);
+  }
+
+  // ❌ KONDISI KALAH (max gagal 3)
+  if (fails >= 3) {
+    gameOver = true;
+    setTimeout(() => alert("💀 Kesempatan habis! Kamu kalah."), 300);
+  }
 }

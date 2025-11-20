@@ -66,8 +66,11 @@ function checkMatch() {
     fails++;
     failsText.textContent = fails;
 
-    firstCard.classList.remove("open");
-    secondCard.classList.remove("open");
+  setTimeout(() => {
+  firstCard.classList.remove("open");
+  secondCard.classList.remove("open");
+}, 300);
+
   }
 
   // 🏆 CEK MENANG / KALAH SEBELUM RESET BOARD
@@ -88,5 +91,5 @@ function checkMatch() {
     firstCard = null;
     secondCard = null;
     lockBoard = false;  // 🔓 buka lagi klik
-  }, 200);
+  }, 450);
 }

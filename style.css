@@ -23,6 +23,7 @@ body {
   grid-template-columns: repeat(3, 100px);
   gap: 15px;
   justify-content: center;
+  /* PENTING: Untuk memastikan transformasi 3D berjalan */
   perspective: 1000px;
 }
 

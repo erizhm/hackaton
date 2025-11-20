@@ -35,8 +35,10 @@ body {
 }
 
 .card.open,
-.card.matched {
-  transform: rotateY(180deg);
+.card.matched .back {
+  background: #4caf50;
+  color: white;
+  border-color: #2e7d32;
 }
 
 .front,

@@ -37,28 +37,31 @@ cards.forEach((value) => {
 
 function clickCard(card) {
   if (lockBoard) return;
-  if (card.classList.contains("open") || card.classList.contains("matched")) {
-    return;
-  }
-
-  // ⛔ Cegah klik kartu yang sama dua kali
-  if (card === firstCard) return;
+  if (card.classList.contains("open") || card.classList.contains("matched")) return;
+  if (card === firstCard) return; // ⛔ cegah double click kartu pertama
 
   card.classList.add("open");
   card.textContent = card.dataset.value;
 
   if (!firstCard) {
     firstCard = card;
-  } else if (!secondCard) {
+
+    // kunci sebentar agar user tidak bisa spam
+    lockBoard = true;
+    setTimeout(() => { lockBoard = false }, 150);
+
+  } else {
     secondCard = card;
 
+    // kunci sampai checkMatch selesai
     lockBoard = true;
-
     setTimeout(() => {
       checkMatch();
     }, 700);
   }
 }
+
+
 
 function checkMatch() {
   if (firstCard.dataset.value === secondCard.dataset.value) {

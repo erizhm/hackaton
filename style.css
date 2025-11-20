@@ -5,8 +5,13 @@
 }
 
 body {
-  background: #0b6623;
-  background-image: url("https://www.transparenttextures.com/patterns/cloth.png")
+  background: repeating-linear-gradient(
+    45deg,
+    #f2f2f2,
+    #f2f2f2 10px,
+    #e6e6e6 10px,
+    #e6e6e6 20px
+  );
   font-family: Arial, sans-serif;
   text-align: center;
   display: flex;

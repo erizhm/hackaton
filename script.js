@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameBoard = document.getElementById("game")
     let failsText = document.getElementById("fails")
     let matchesText = document.getElementById("matches")
+    let popup = document.getElementById("popup")
+    let popupMessage = document.getElementById("popup-message")
+    let closePopupButton = document.getElementById("close-popup")
 
     let fails = 0
     let matches = 0
@@ -10,6 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let secondCard = null
     let lockBoard = false
     let gameOver = false // stop saat menang/kalah
+
+    function showPopup(message) {
+        popupMessage.textContent = message
+        popup.style.display = 'flex'
+    }
+    
+    closePopupButton.addEventListener('click', () => {
+        window.location.reload()
+    })
 
     function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -77,13 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cek menang/kalah sebelum game selesai
         if (matches === 3) {
             gameOver = true
-            setTimeout(() => alert("🎉 Kamu Menang!"), 300)
+            setTimeout(() => showPopup("🎉 Kamu Menang!"), 300) 
             return
         }
 
         if (fails >= 3) {
             gameOver = true
-            setTimeout(() => alert("💀 Kesempatan habis! Kamu kalah."), 300)
+            setTimeout(() => showPopup("💀 Kesempatan habis! Kamu kalah."), 300) 
             return
         }
 

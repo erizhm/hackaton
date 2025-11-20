@@ -39,20 +39,26 @@ function clickCard(card) {
     return;
   }
 
+  card.classList.add("open");
+  card.textContent = card.dataset.value;
+
+  if (!firstCard) {
+    firstCard = card;
+  } else if (!secondCard) {
+    secondCard = card;
+
+    setTimeout(() => {
+      checkMatch();
+    }, 700);
+  }
+}
+
   // buka kartu
   card.classList.add("open");
   card.textContent = card.dataset.value;
 
   if (!firstCard) {
     firstCard = card;
-
-    // kartu pertama ditutup setelah 1 detik
-    setTimeout(() => {
-      if (firstCard && !firstCard.classList.contains("matched")) {
-        firstCard.classList.remove("open");
-        firstCard.textContent = "?";
-      }
-    }, 1000);
 
   } else if (!secondCard) {
     secondCard = card;
@@ -65,8 +71,6 @@ function clickCard(card) {
 }
 
 function checkMatch() {
-  if (!firstCard || !secondCard) return;
-
   if (firstCard.dataset.value === secondCard.dataset.value) {
     // match
     firstCard.classList.add("matched");
@@ -74,7 +78,7 @@ function checkMatch() {
     matches++;
     matchesText.textContent = matches;
   } else {
-    // gagal
+    // gagal → tutup kedua kartu
     fails++;
     failsText.textContent = fails;
 
@@ -88,13 +92,10 @@ function checkMatch() {
   firstCard = null;
   secondCard = null;
 
-  // cek menang
   if (matches === 3) {
-    setTimeout(() => alert("Kamu Menang! 🎉"), 500);
+    setTimeout(() => alert("Kamu Menang! 🎉"), 300);
   }
-
-  // cek kalah
   if (fails >= 6) {
-    setTimeout(() => alert("Kesempatan habis! Coba lagi."), 500);
+    setTimeout(() => alert("Kesempatan habis! Coba lagi."), 300);
   }
 }
